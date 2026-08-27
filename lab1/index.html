@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A D3.js student score bar chart for STATS 401 Lab 1.">
+  <title>Lab 1: Student Scores | STATS 401</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <main id="main-content">
+    <header class="page-header">
+      <p class="eyebrow">STATS 401 · LAB 1</p>
+      <h1 class="chart-title">Student Scores</h1>
+      <p class="intro">My first data-driven visualization with D3.js.</p>
+    </header>
+
+    <nav class="lab-nav" aria-label="Lab navigation">
+      <a href="../">Home</a>
+      <a class="active" aria-current="page" href="./">Lab 1</a>
+      <a href="../lab2/">Lab 2</a>
+      <a href="../lab3/">Lab 3</a>
+      <a href="../lab4/">Lab 4</a>
+      <a href="../lab5/">Lab 5</a>
+      <a href="../lab6/">Lab 6</a>
+      <a href="../lab7/">Lab 7</a>
+      <a href="../lab8/">Lab 8</a>
+      <a href="../lab9/">Lab 9</a>
+      <a href="../lab10/">Lab 10</a>
+    </nav>
+
+    <section class="chart-card" aria-labelledby="chart-heading">
+      <div class="chart-header">
+        <div>
+          <p class="section-label">D3 + SVG VISUALIZATION</p>
+          <h2 id="chart-heading">Student Score Bar Chart</h2>
+          <p class="chart-note">Higher score <span aria-hidden="true">→</span> taller bar</p>
+        </div>
+        <dl class="chart-meta">
+          <div><dt>Data</dt><dd>students.csv</dd></div>
+          <div><dt>Records</dt><dd>8 students</dd></div>
+          <div><dt>Range</dt><dd>0–100</dd></div>
+        </dl>
+      </div>
+
+      <div id="chart" class="chart-container" aria-live="polite" aria-busy="true">
+        <p class="loading-message">Loading student score data…</p>
+      </div>
+      <p class="mobile-hint">Swipe horizontally to view all eight students.</p>
+
+      <p class="chart-caption">
+        Each bar is generated from one row of the external CSV dataset using D3
+        data binding. The student name and score appear below every bar.
+      </p>
+      <noscript><p class="error-message">JavaScript is required to display this visualization.</p></noscript>
+    </section>
+
+    <footer class="site-footer">
+      <a href="../">← Back to the course homepage</a>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
