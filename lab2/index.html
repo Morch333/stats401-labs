@@ -1,3 +1,97 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lab 2 | STATS 401</title><link rel="stylesheet" href="../css/style.css?v=20260827"></head>
-<body><main><p class="eyebrow">STATS 401</p><h1>Lab 2</h1><p class="placeholder">Lab 2 will be added here.</p><a class="button" href="../">Back to home</a></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A four-dimensional D3 visualization of city population, temperature, development level, and region for STATS 401 Lab 2.">
+  <title>Lab 2: Multivariate City Visualization | STATS 401</title>
+  <link rel="stylesheet" href="../css/style.css?v=20260827-lab2">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <main id="main-content">
+    <header class="page-header">
+      <p class="eyebrow">STATS 401 · LAB 2</p>
+      <h1>Four Dimensions of Cities</h1>
+      <p class="intro">A multivariate D3 visualization of population, temperature, development level, and region.</p>
+    </header>
+
+    <nav class="lab-nav" aria-label="Lab navigation">
+      <a href="../">Home</a>
+      <a href="../lab1/">Lab 1</a>
+      <a class="active" aria-current="page" href="./">Lab 2</a>
+      <a href="../lab3/">Lab 3</a>
+      <a href="../lab4/">Lab 4</a>
+      <a href="../lab5/">Lab 5</a>
+      <a href="../lab6/">Lab 6</a>
+      <a href="../lab7/">Lab 7</a>
+      <a href="../lab8/">Lab 8</a>
+      <a href="../lab9/">Lab 9</a>
+      <a href="../lab10/">Lab 10</a>
+    </nav>
+
+    <section class="chart-card lab2-card" aria-labelledby="chart-heading">
+      <div class="chart-header">
+        <div>
+          <p class="section-label">D3 MULTIVARIATE VISUALIZATION</p>
+          <h2 id="chart-heading">Regional City Lollipop Chart</h2>
+          <p class="chart-note">Four variables, one coordinated visual system</p>
+        </div>
+        <dl class="chart-meta">
+          <div><dt>Data</dt><dd>cities_multivariate.csv</dd></div>
+          <div><dt>Records</dt><dd>12 cities</dd></div>
+          <div><dt>Dimensions</dt><dd>4 variables</dd></div>
+        </dl>
+      </div>
+
+      <div class="encoding-grid" aria-label="Visual encoding key">
+        <div><span class="encoding-key">Length</span><strong>Population</strong></div>
+        <div><span class="encoding-key">Color</span><strong>Temperature</strong></div>
+        <div><span class="encoding-key">Size</span><strong>Development</strong></div>
+        <div><span class="encoding-key">Panel</span><strong>Region</strong></div>
+      </div>
+
+      <div class="legend-panel" aria-label="Chart legends">
+        <div class="temperature-legend">
+          <p><strong>Temperature</strong> <span>cooler → warmer</span></p>
+          <div class="temperature-gradient" aria-hidden="true"></div>
+          <div class="legend-range"><span>10.5°C</span><span>26.0°C</span></div>
+        </div>
+        <div class="size-legend">
+          <p><strong>Development level</strong></p>
+          <div class="size-items">
+            <span><i class="size-dot size-low"></i>Low</span>
+            <span><i class="size-dot size-medium"></i>Medium</span>
+            <span><i class="size-dot size-high"></i>High</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="lab2-chart" class="chart-container lab2-chart-container" aria-live="polite" aria-busy="true">
+        <p class="loading-message">Loading multivariate city data…</p>
+      </div>
+      <p class="mobile-hint">Swipe horizontally to explore all four regional panels.</p>
+      <p id="data-summary" class="data-summary" aria-live="polite"></p>
+      <p class="chart-caption">Hover over a marker—or focus it with the keyboard—to identify the city and inspect all four values.</p>
+      <noscript><p class="error-message">JavaScript is required to display this visualization.</p></noscript>
+    </section>
+
+    <section class="card justification" aria-labelledby="justification-heading">
+      <p class="section-label">DESIGN JUSTIFICATION</p>
+      <h2 id="justification-heading">Why these visual channels?</h2>
+      <p>
+        This visualization uses a faceted lollipop design instead of a conventional scatterplot. Population, a ratio variable, is mapped to horizontal length and position on a shared zero-based scale, making city populations easy to compare accurately. Temperature, an interval variable, is mapped to a continuous cool-to-warm color scale, which emphasizes relative thermal differences without implying separate categories. Development level is ordinal, so increasing marker sizes represent the ordered progression from Low to Medium to High. Region is nominal and therefore controls the four labeled panels rather than using an ordered channel. City names appear beside every mark, while tooltips provide all exact values. The design should help viewers compare population within and across regions, locate warmer or cooler cities, and notice whether highly developed cities tend to be larger. Repeating the same scale in each panel keeps comparisons consistent while avoiding the visual crowding of a four-encoding scatterplot.
+      </p>
+    </section>
+
+    <footer class="site-footer">
+      <a href="../">← Back to the course homepage</a>
+    </footer>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="tooltip" aria-hidden="true"></div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="lab2.js?v=20260827-lab2"></script>
+</body>
+</html>
