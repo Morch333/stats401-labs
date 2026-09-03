@@ -20,67 +20,56 @@
     </nav>
 
     <div class="hero-grid">
-      <div>
-        <p class="eyebrow">Data Acquisition &amp; Visualization</p>
-        <h1>A thousand books,<br><em>one reproducible pipeline.</em></h1>
-        <p class="lede">
-          A paginated sample of science-book records acquired responsibly from the
-          Open Library Search API with Python, then transformed into an
-          explorable browser table.
-        </p>
-      </div>
-
-      <div class="pipeline" aria-label="Data pipeline: API to Python to CSV to sortable table">
-        <span>API</span><b aria-hidden="true">→</b><span>PYTHON</span><b aria-hidden="true">→</b><span>CSV</span><b aria-hidden="true">→</b><span>TABLE</span>
-      </div>
+      <p class="eyebrow">STATS 401 · LAB 3</p>
+      <h1>Web Data Acquisition with Python</h1>
+      <p class="lede">
+        For this lab, I collected science-related book records from Open
+        Library and displayed them in a sortable table.
+      </p>
     </div>
   </header>
 
   <main>
     <section class="summary" aria-labelledby="summary-title">
       <div class="section-heading">
-        <p class="kicker">01 / DATASET</p>
-        <h2 id="summary-title">What is in this collection?</h2>
+        <h2 id="summary-title">About the dataset</h2>
       </div>
 
       <div class="summary-copy">
         <p>
-          Each row represents one distinct Open Library catalog record returned by the
-          query <code>subject:science</code>. The dataset includes its Open Library ID,
-          title, author(s), first publication year, edition count, primary
-          language, number of represented languages, and full-text status.
+          The dataset contains 1,000 Open Library records returned by the search
+          <code>subject:science</code>. Each row includes a book ID, title,
+          author, first publication year, edition count, language information,
+          and whether full text is available.
         </p>
         <p>
-          <strong>Method:</strong> REST API using Python
-          <code>requests</code> and <code>pandas</code>. The script follows the
-          documented <code>page</code>/<code>limit</code> pagination pattern,
-          waits 1.1 seconds between calls, retries temporary failures, and
-          checks IDs for uniqueness before saving the CSV.
+          I used Python with <code>requests</code> and <code>pandas</code> to get
+          the data from the Open Library Search API. The script requested 100
+          records at a time until it reached 1,000, waited briefly between
+          requests, and saved the result as a CSV file.
         </p>
       </div>
 
       <dl class="facts">
         <div><dt>Records</dt><dd id="record-total">1,000</dd></div>
-        <div><dt>Attributes</dt><dd>8</dd></div>
-        <div><dt>Format</dt><dd>CSV</dd></div>
-        <div><dt>Acquired</dt><dd>API</dd></div>
+        <div><dt>Source</dt><dd>Open Library</dd></div>
+        <div><dt>Method</dt><dd>API</dd></div>
+        <div><dt>File</dt><dd>CSV</dd></div>
       </dl>
 
       <p class="source-note">
-        Source:
-        <a href="https://openlibrary.org/dev/docs/api/search" target="_blank" rel="noreferrer">Open Library Search API documentation</a>.
-        Open Library asks API users to cache results, identify their application,
-        and respect its default one-request-per-second limit. This static page
-        reads the committed CSV and does not request the API on each visit.
+        Data source:
+        <a href="https://openlibrary.org/dev/docs/api/search" target="_blank" rel="noreferrer">Open Library Search API</a>.
+        The downloaded data is stored in the repository as
+        <code>data/lab3_data.csv</code>.
       </p>
     </section>
 
     <section class="dataset-section" id="dataset" aria-labelledby="dataset-title">
       <div class="table-heading">
         <div>
-          <p class="kicker">02 / EXPLORE</p>
-          <h2 id="dataset-title">Science-book records</h2>
-          <p class="instruction">Select a column heading to sort. Select it again to reverse the order.</p>
+          <h2 id="dataset-title">Book records</h2>
+          <p class="instruction">Click a column name to sort the table. Click it again to reverse the order.</p>
         </div>
 
         <div class="controls">
@@ -119,23 +108,10 @@
       </nav>
     </section>
 
-    <section class="reproducibility" aria-labelledby="repro-title">
-      <div>
-        <p class="kicker">03 / REPRODUCE</p>
-        <h2 id="repro-title">From endpoint to artifact</h2>
-      </div>
-      <ol>
-        <li><span>01</span><p>Request each API page with explicit fields and a descriptive user agent.</p></li>
-        <li><span>02</span><p>Normalize nested JSON into one record per unique Open Library catalog item.</p></li>
-        <li><span>03</span><p>Validate 1,000 unique rows and write <code>data/lab3_data.csv</code>.</p></li>
-      </ol>
-      <pre><code>python lab3/acquire_data.py</code></pre>
-    </section>
   </main>
 
   <footer>
-    <span>STATS 401 · LAB 3</span>
-    <span>Built with Python, D3, and documented public data</span>
+    <span>STATS 401 · Lab 3 · Web Data Acquisition</span>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
