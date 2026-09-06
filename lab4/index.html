@@ -1,3 +1,124 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lab 4 | STATS 401</title><link rel="stylesheet" href="../css/style.css?v=20260827-lab2"></head>
-<body><main><p class="eyebrow">STATS 401</p><h1>Lab 4</h1><p class="placeholder">Lab 4 will be added here.</p><a class="button" href="../">Back to home</a></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="STATS 401 Lab 4: cleaning airline tweets and comparing RoBERTa sentiment across airlines.">
+  <title>Lab 4 | Cleaning Web Data</title>
+  <link rel="stylesheet" href="styles.css?v=20260906">
+</head>
+<body>
+  <a class="skip-link" href="#chart-section">Skip to chart</a>
+
+  <header class="page-header">
+    <nav aria-label="Course navigation">
+      <a href="../">← All labs</a>
+      <span>STATS 401 · Lab 4</span>
+    </nav>
+    <div class="header-content">
+      <p class="lab-number">Lab 4</p>
+      <h1>Cleaning Web Data for Visualization</h1>
+      <p>
+        I cleaned a sample of airline tweets, estimated the sentiment of each
+        tweet, and compared the results across six airlines.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="overview" aria-labelledby="overview-title">
+      <div>
+        <h2 id="overview-title">Dataset</h2>
+        <p>
+          The source is the
+          <a href="https://huggingface.co/datasets/osanseviero/twitter-airline-sentiment" target="_blank" rel="noreferrer">Twitter US Airline Sentiment dataset</a>,
+          originally collected by CrowdFlower in February 2015. I used 200
+          tweets from each airline so the comparison would not be affected by
+          unequal sample sizes.
+        </p>
+      </div>
+
+      <dl class="facts">
+        <div><dt>Raw records</dt><dd>14,640</dd></div>
+        <div><dt>Tweets analyzed</dt><dd>1,200</dd></div>
+        <div><dt>Airlines</dt><dd>6</dd></div>
+        <div><dt>Sentiment model</dt><dd>RoBERTa</dd></div>
+      </dl>
+    </section>
+
+    <section class="chart-section" id="chart-section" aria-labelledby="chart-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="chart-title">Sentiment by airline</h2>
+          <p>Each bar represents 200 tweets. Hover over a section for the count and percentage.</p>
+        </div>
+        <div class="legend" aria-label="Sentiment color legend">
+          <span><i class="negative"></i>Negative</span>
+          <span><i class="neutral"></i>Neutral</span>
+          <span><i class="positive"></i>Positive</span>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <svg id="sentiment-chart" role="img" aria-labelledby="chart-title chart-description"></svg>
+        <p id="chart-description" class="sr-only">
+          A 100 percent stacked bar chart comparing RoBERTa sentiment estimates
+          for six U.S. airlines.
+        </p>
+        <div id="tooltip" class="tooltip" hidden></div>
+        <p id="chart-error" class="error" role="alert" hidden></p>
+      </div>
+
+      <div class="table-wrap">
+        <table id="summary-table">
+          <caption>Percentage of tweets in each sentiment class by airline</caption>
+          <thead>
+            <tr>
+              <th scope="col">Airline</th>
+              <th scope="col">Negative</th>
+              <th scope="col">Neutral</th>
+              <th scope="col">Positive</th>
+              <th scope="col">Average score</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="analysis" aria-labelledby="analysis-title">
+      <h2 id="analysis-title">Analysis</h2>
+      <p>
+        I used 1,200 records from the Twitter US Airline Sentiment dataset. After
+        parsing the dates and retweet counts, I removed 155 duplicate tweet IDs,
+        standardized usernames and whitespace, and selected 200 tweets per
+        airline. I kept the original wording for sentiment analysis because
+        punctuation and negation can affect meaning. Sentiment was estimated
+        with the Twitter RoBERTa model, and the score is the positive probability
+        minus the negative probability. The chart shows the percentage of
+        negative, neutral, and positive tweets for each airline. US Airways and
+        American have the largest negative shares, at 64.0% and 62.5%.
+        Virgin America has the largest positive share at 38.5% and is the only
+        airline with a positive average score. Delta is more evenly divided
+        across the three categories. These values are model estimates rather
+        than ground-truth judgments, so sarcasm and ambiguous wording may still
+        be classified incorrectly.
+      </p>
+    </section>
+
+    <section class="files" aria-labelledby="files-title">
+      <h2 id="files-title">Files</h2>
+      <ul>
+        <li><a href="clean_tweets.py">Python cleaning and analysis script</a></li>
+        <li><a href="../data/lab4_clean_tweets.csv">Cleaned tweet data</a></li>
+        <li><a href="../data/lab4_sentiment_by_airline.csv">Chart data</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>STATS 401 · Data Acquisition and Visualization</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="lab4.js?v=20260906"></script>
+</body>
+</html>

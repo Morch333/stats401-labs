@@ -1,0 +1,31 @@
+{
+  "source": "https://huggingface.co/datasets/osanseviero/twitter-airline-sentiment",
+  "license": "CC BY-NC-SA 4.0",
+  "raw_rows": 14640,
+  "raw_columns": 15,
+  "missing_tweet_id": 0,
+  "missing_text": 0,
+  "missing_airline": 0,
+  "duplicate_rows": 36,
+  "duplicate_tweet_ids": 155,
+  "invalid_dates": 0,
+  "invalid_retweet_counts": 0,
+  "rows_after_structured_cleaning": 14485,
+  "final_rows": 1200,
+  "sample_per_airline": 200,
+  "airlines": [
+    "American",
+    "Delta",
+    "Southwest",
+    "US Airways",
+    "United",
+    "Virgin America"
+  ],
+  "tfidf_vocabulary_size": 728,
+  "sentiment_model": "cardiffnlp/twitter-roberta-base-sentiment-latest",
+  "sentiment_counts": {
+    "Negative": 586,
+    "Neutral": 323,
+    "Positive": 291
+  }
+}

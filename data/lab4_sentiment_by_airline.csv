@@ -1,0 +1,19 @@
+airline,sentiment,count,mean_score,airline_total,percent
+American,Negative,125,-0.8269,200,62.5
+American,Neutral,43,-0.0468,200,21.5
+American,Positive,32,0.8014,200,16.0
+Delta,Negative,75,-0.7774,200,37.5
+Delta,Neutral,62,-0.0036,200,31.0
+Delta,Positive,63,0.8354,200,31.5
+Southwest,Negative,86,-0.8228,200,43.0
+Southwest,Neutral,58,-0.0271,200,29.0
+Southwest,Positive,56,0.8603,200,28.0
+US Airways,Negative,128,-0.8151,200,64.0
+US Airways,Neutral,41,-0.0428,200,20.5
+US Airways,Positive,31,0.79,200,15.5
+United,Negative,104,-0.8149,200,52.0
+United,Neutral,64,-0.0229,200,32.0
+United,Positive,32,0.8286,200,16.0
+Virgin America,Negative,68,-0.7684,200,34.0
+Virgin America,Neutral,55,0.0011,200,27.5
+Virgin America,Positive,77,0.9048,200,38.5
