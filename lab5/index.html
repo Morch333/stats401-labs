@@ -1,3 +1,178 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lab 5 | STATS 401</title><link rel="stylesheet" href="../css/style.css?v=20260827-lab2"></head>
-<body><main><p class="eyebrow">STATS 401</p><h1>Lab 5</h1><p class="placeholder">Lab 5 will be added here.</p><a class="button" href="../">Back to home</a></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="STATS 401 Lab 5: two views of a 50-station transit network.">
+  <title>Lab 5 | Transit Network</title>
+  <link rel="stylesheet" href="styles.css?v=20260908">
+</head>
+<body>
+  <a class="skip-link" href="#network-section">Skip to network</a>
+
+  <header class="page-header">
+    <nav aria-label="Course navigation">
+      <a href="../">← All labs</a>
+      <span>STATS 401 · Lab 5</span>
+    </nav>
+    <div class="header-content">
+      <p class="lab-number">Lab 5</p>
+      <h1>Two Views of a Transit Network</h1>
+      <p>
+        The same 50-station system looks different as a force-directed map and
+        as a station-by-station matrix.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="overview" aria-labelledby="overview-title">
+      <div>
+        <h2 id="overview-title">Urban transit data</h2>
+        <p>
+          This synthetic network has five districts and three station types.
+          A route means that two stations are directly connected; all routes
+          are treated as undirected.
+        </p>
+      </div>
+      <dl class="facts">
+        <div><dt>Stations</dt><dd>50</dd></div>
+        <div><dt>Routes</dt><dd>50</dd></div>
+        <div><dt>Districts</dt><dd>5</dd></div>
+        <div><dt>Route types</dt><dd>3</dd></div>
+      </dl>
+    </section>
+
+    <section class="viz-section" id="network-section" aria-labelledby="network-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">01</p>
+          <h2 id="network-title">Node-link view</h2>
+          <p>Hover over a station or route to isolate its connections. Drag any station to rearrange the layout.</p>
+        </div>
+        <button id="reset-layout" type="button">Reset layout</button>
+      </div>
+
+      <div class="encoding-key" aria-label="Node-link visual encodings">
+        <div>
+          <h3>Station</h3>
+          <p><span class="shape circle"></span>Local <span class="shape diamond"></span>Transfer <span class="shape square"></span>Terminal</p>
+          <p>Color = district · Size = daily passengers</p>
+        </div>
+        <div>
+          <h3>Route</h3>
+          <p><span class="route-swatch metro"></span>Metro <span class="route-swatch express"></span>Express <span class="route-swatch shuttle"></span>Shuttle</p>
+          <p>Width = travel time</p>
+        </div>
+        <div>
+          <h3>District</h3>
+          <p id="district-legend" class="district-legend"></p>
+        </div>
+      </div>
+
+      <div class="network-wrap">
+        <svg id="network" viewBox="0 0 1100 680" role="img" aria-labelledby="network-title network-description"></svg>
+        <p id="network-description" class="sr-only">
+          Force-directed diagram of 50 transit stations. Station color represents district,
+          size represents daily passengers, shape represents station type, route color
+          represents service type, and line width represents travel time.
+        </p>
+        <p id="network-error" class="error" role="alert" hidden></p>
+      </div>
+
+      <div class="design-note">
+        <h3>Why I used these encodings</h3>
+        <p>
+          District color makes neighboring areas easy to compare, while station area gives busy stops more visual weight. I used different shapes for local, transfer, and terminal stations because those are categories, not amounts. Route color separates the three services, and thicker lines mark longer travel times. Hovering removes unrelated detail; dragging is useful when two labels overlap.
+        </p>
+      </div>
+    </section>
+
+    <section class="viz-section" aria-labelledby="matrix-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">02</p>
+          <h2 id="matrix-title">Adjacency matrix</h2>
+          <p>Stations are grouped by district. Hover over a filled cell for the route details.</p>
+        </div>
+      </div>
+
+      <div class="matrix-key" aria-label="Adjacency matrix visual encodings">
+        <span><i class="metro"></i>Metro</span>
+        <span><i class="express"></i>Express</span>
+        <span><i class="shuttle"></i>Shuttle</span>
+        <span class="opacity-note">Darker cell = longer trip</span>
+      </div>
+
+      <div class="matrix-wrap">
+        <svg id="matrix" viewBox="0 0 940 940" role="img" aria-labelledby="matrix-title matrix-description"></svg>
+        <p id="matrix-description" class="sr-only">
+          Symmetric adjacency matrix for the same 50-station network. Rows and columns
+          are grouped by district. Filled cells are direct routes, color represents
+          route type, and opacity represents travel time.
+        </p>
+        <p id="matrix-error" class="error" role="alert" hidden></p>
+      </div>
+
+      <div class="design-note">
+        <h3>Why I ordered the matrix this way</h3>
+        <p>
+          Both axes list the same stations, so every filled cell is a direct route. I grouped the labels by district and colored the margin bands to make district-to-district blocks visible. Cell color keeps route type, while opacity keeps travel time. The matrix trades the network’s overall shape for exact pair lookup and makes isolated stations show up as empty rows and columns.
+        </p>
+      </div>
+    </section>
+
+    <section class="questions" aria-labelledby="questions-title">
+      <p class="section-number">03</p>
+      <h2 id="questions-title">What I found</h2>
+      <div class="question-grid">
+        <article>
+          <p class="answer-tag">Well · Node-link</p>
+          <h3>Which stations are central?</h3>
+          <p>There is no single hub: the highest degree is only three. Hovering shows Stations 7, 18, 21, 29, and 33 among the well-connected shortcut stations near the core.</p>
+        </article>
+        <article>
+          <p class="answer-tag">Well · Matrix</p>
+          <h3>Which districts connect strongly?</h3>
+          <p>The densest off-diagonal block is East–South with 11 routes. Central–North and East–West follow with nine each; the district ordering makes those blocks countable.</p>
+        </article>
+        <article>
+          <p class="answer-tag">Partly · Node-link</p>
+          <h3>Where are transfer and terminal stations?</h3>
+          <p>Diamonds and squares occur across every district and along the main chain. Most terminals are not endpoints, so station type does not closely match topological position.</p>
+        </article>
+        <article>
+          <p class="answer-tag">Well · Node-link</p>
+          <h3>Which stations are busiest?</h3>
+          <p>The largest symbols belong to Stations 43–50. Station 50 is largest at 9,850 passengers but has only one route; several other high-volume stations are isolated.</p>
+        </article>
+        <article>
+          <p class="answer-tag">Well · Both views</p>
+          <h3>Where are the longest routes?</h3>
+          <p>The thickest link and darkest Express cells join Stations 7 and 31 at 16 minutes. Stations 18–34 and 29–50 follow at 15 and 14 minutes.</p>
+        </article>
+        <article>
+          <p class="answer-tag">Partly · Matrix</p>
+          <h3>Are route types concentrated?</h3>
+          <p>The three cell colors are spread across the matrix rather than forming a clear block. Counts are nearly even—17 Express, 17 Shuttle, and 16 Metro routes.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="files" aria-labelledby="files-title">
+      <h2 id="files-title">Files</h2>
+      <ul>
+        <li><a href="../data/lab5_assignment_stations.csv">Station data</a></li>
+        <li><a href="../data/lab5_assignment_routes.csv">Route data</a></li>
+        <li><a href="lab5.js">D3 source code</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="status" hidden></div>
+  <footer>STATS 401 · Data Acquisition and Visualization</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="lab5.js?v=20260908"></script>
+</body>
+</html>
