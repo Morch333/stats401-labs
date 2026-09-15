@@ -1,3 +1,123 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lab 6 | STATS 401</title><link rel="stylesheet" href="../css/style.css?v=20260827-lab2"></head>
-<body><main><p class="eyebrow">STATS 401</p><h1>Lab 6</h1><p class="placeholder">Lab 6 will be added here.</p><a class="button" href="../">Back to home</a></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="STATS 401 Lab 6: comparing two treemap layouts for hierarchical GDP data.">
+  <title>Lab 6 | GDP Treemaps</title>
+  <link rel="stylesheet" href="styles.css?v=20260915">
+</head>
+<body>
+  <a class="skip-link" href="#treemaps">Skip to treemaps</a>
+
+  <header class="page-header">
+    <nav aria-label="Course navigation">
+      <a href="../">← All labs</a>
+      <span>STATS 401 · Lab 6</span>
+    </nav>
+    <div class="header-content">
+      <p class="lab-number">Lab 6</p>
+      <h1>GDP, Arranged Two Ways</h1>
+      <p>
+        Two treemap algorithms divide the same country-level GDP hierarchy into
+        noticeably different shapes.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="overview" aria-labelledby="overview-title">
+      <div>
+        <h2 id="overview-title">Dataset</h2>
+        <p>
+          I converted the supplied flat GDP table into a nested JSON file with
+          Python. The hierarchy runs from World to continent, area, and country.
+        </p>
+      </div>
+      <dl class="facts">
+        <div><dt>Countries</dt><dd>27</dd></div>
+        <div><dt>Continents</dt><dd>6</dd></div>
+        <div><dt>Areas</dt><dd>15</dd></div>
+        <div><dt>Total GDP</dt><dd>$85.2T</dd></div>
+      </dl>
+    </section>
+
+    <section class="treemap-section" id="treemaps" aria-labelledby="treemap-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">Two layouts · one hierarchy</p>
+          <h2 id="treemap-title">GDP by country</h2>
+          <p>Rectangle area represents GDP in billions of U.S. dollars. Hover over any country for details.</p>
+        </div>
+        <div class="status-legend" aria-label="GDP status color legend">
+          <span><i class="increase"></i>Increase</span>
+          <span><i class="unchanged"></i>Unchanged</span>
+          <span><i class="decrease"></i>Decrease</span>
+        </div>
+      </div>
+
+      <div class="treemap-grid">
+        <article class="chart-card">
+          <div class="chart-heading">
+            <div>
+              <p class="chart-number">A</p>
+              <h3>Squarified</h3>
+            </div>
+            <code>d3.treemapSquarify</code>
+          </div>
+          <p class="chart-note">Compact rectangles make country areas easier to compare.</p>
+          <div class="chart-wrap">
+            <svg id="treemap-squarify" viewBox="0 0 920 560" role="img" aria-labelledby="squarify-title squarify-description">
+              <title id="squarify-title">Squarified GDP treemap</title>
+              <desc id="squarify-description">A treemap using compact rectangular tiles. Rectangle area represents GDP and color represents GDP status.</desc>
+            </svg>
+          </div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-heading">
+            <div>
+              <p class="chart-number">B</p>
+              <h3>Slice–Dice</h3>
+            </div>
+            <code>d3.treemapSliceDice</code>
+          </div>
+          <p class="chart-note">Alternating strips make the hierarchy’s levels more visible.</p>
+          <div class="chart-wrap">
+            <svg id="treemap-slicedice" viewBox="0 0 920 560" role="img" aria-labelledby="slicedice-title slicedice-description">
+              <title id="slicedice-title">Slice-dice GDP treemap</title>
+              <desc id="slicedice-description">A treemap using alternating horizontal and vertical strips. Rectangle area represents GDP and color represents GDP status.</desc>
+            </svg>
+          </div>
+        </article>
+      </div>
+
+      <p id="chart-error" class="error" role="alert" hidden></p>
+    </section>
+
+    <section class="design" aria-labelledby="design-title">
+      <p class="section-number">Design note</p>
+      <h2 id="design-title">Why the layouts look different</h2>
+      <p>
+        Both treemaps use rectangle area for GDP because it shows each country as part of the world total. I used green for an increase, gold for no change, and red for a decrease; the same palette appears in both views so the layout is the only structural difference. Continent and area labels sit above their country cells, while the tooltip gives the full path, exact GDP, and status when a label does not fit. The squarified layout produces compact rectangles, which makes area comparison and country labels easier. Its branches are less obvious at first glance, so I added heavy continent outlines and lighter area boundaries. Slice–dice alternates the direction of subdivision at each level. The resulting bands make continents and areas easier to follow, but small economies become thin strips and are harder to compare precisely. For this dataset, I would use the squarified view for comparing GDP and the slice–dice view for tracing the hierarchy.
+      </p>
+    </section>
+
+    <section class="files" aria-labelledby="files-title">
+      <h2 id="files-title">Files</h2>
+      <ul>
+        <li><a href="../data/lab6_assignment_gdp.csv">Flat GDP data</a></li>
+        <li><a href="../data/lab6_assignment_gdp.json">Hierarchical JSON</a></li>
+        <li><a href="convert_gdp.py">Python conversion script</a></li>
+        <li><a href="lab6.js">D3 source code</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="status" hidden></div>
+  <footer>STATS 401 · Data Acquisition and Visualization</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="lab6.js?v=20260915"></script>
+</body>
+</html>

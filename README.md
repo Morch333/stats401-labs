@@ -7,6 +7,7 @@ Open Library Search API with Python and displays them in a sortable table. Lab 4
 cleans a balanced sample of 1,200 airline tweets, estimates sentiment with
 RoBERTa, and compares the results in a D3 stacked bar chart. Lab 5 represents
 a 50-station transit network with a force-directed diagram and an adjacency
-matrix.
+matrix. Lab 6 converts flat GDP data into hierarchical JSON and compares
+squarified and slice–dice treemap layouts.
 
 Published site: https://morch333.github.io/stats401-labs/
