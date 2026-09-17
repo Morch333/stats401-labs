@@ -1,3 +1,143 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lab 7 | STATS 401</title><link rel="stylesheet" href="../css/style.css?v=20260827-lab2"></head>
-<body><main><p class="eyebrow">STATS 401</p><h1>Lab 7</h1><p class="placeholder">Lab 7 will be added here.</p><a class="button" href="../">Back to home</a></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="STATS 401 Lab 7: an animated network of commercial transactions over 60 days.">
+  <title>Lab 7 | Commercial Network Over Time</title>
+  <link rel="stylesheet" href="styles.css?v=20260917">
+</head>
+<body>
+  <a class="skip-link" href="#network">Skip to network</a>
+
+  <header class="page-header">
+    <nav aria-label="Course navigation">
+      <a href="../">← All labs</a>
+      <span>STATS 401 · Lab 7</span>
+    </nav>
+    <div class="header-content">
+      <p class="eyebrow">60 days · 12 companies</p>
+      <h1>A commercial network in motion</h1>
+      <p>Each frame shows the transactions recorded on one day. The companies stay in roughly the same places so changes in the links are easier to follow.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="network-section" id="network" aria-labelledby="network-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Daily view</p>
+          <h2 id="network-title">Who traded with whom?</h2>
+        </div>
+        <p class="hint">Hover over a company or transaction for details.</p>
+      </div>
+
+      <div class="controls" aria-label="Animation controls">
+        <div class="button-group">
+          <button id="play" type="button">▶ Play</button>
+          <button id="pause" type="button">Pause</button>
+          <button id="reset" type="button">Reset</button>
+        </div>
+        <label class="slider-wrap" for="day-slider">
+          <span>Day</span>
+          <input id="day-slider" type="range" min="1" max="60" value="1" step="1">
+        </label>
+        <div class="date-display" aria-live="polite">
+          <strong id="day-label">Day 1</strong>
+          <span id="date-label">January 1, 2026</span>
+        </div>
+      </div>
+
+      <div class="summary" aria-label="Current day summary">
+        <div><span>Active companies</span><strong id="active-companies">—</strong></div>
+        <div><span>Active links</span><strong id="active-links">—</strong></div>
+        <div><span>Daily value</span><strong id="daily-value">—</strong></div>
+        <div><span>Cross-region links</span><strong id="cross-region">—</strong></div>
+      </div>
+
+      <div class="chart-layout">
+        <div class="chart-panel">
+          <svg id="network-chart" viewBox="0 0 940 650" role="img" aria-labelledby="chart-title chart-description">
+            <title id="chart-title">Animated commercial transaction network</title>
+            <desc id="chart-description">Twelve companies connected by daily commercial transactions. Node size changes with daily transaction volume.</desc>
+          </svg>
+          <p id="chart-error" class="error" role="alert" hidden></p>
+        </div>
+
+        <aside class="legend" aria-label="Visual encoding legend">
+          <div>
+            <h3>Companies</h3>
+            <p><b>Fill</b> shows sector. <b>Outline</b> shows region. Larger circles handled more money that day.</p>
+            <div id="sector-legend" class="legend-list"></div>
+            <div class="region-legend">
+              <span><i class="region-swatch asia"></i>Asia</span>
+              <span><i class="region-swatch europe"></i>Europe</span>
+              <span><i class="region-swatch north-america"></i>North America</span>
+            </div>
+          </div>
+          <div>
+            <h3>Transactions</h3>
+            <p><b>Color</b> shows type. Thicker and darker lines represent larger amounts and more transactions.</p>
+            <div id="type-legend" class="legend-list"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="observations" aria-labelledby="observations-title">
+      <p class="eyebrow">What I found</p>
+      <h2 id="observations-title">The network gets busier after day 40</h2>
+      <div class="observation-grid">
+        <article>
+          <span>01</span>
+          <h3>Connectivity</h3>
+          <p>Daily links rise from an average of 5.5 in days 1–20 to 7.3 in days 41–60. Day 45 is the busiest frame, with 10 links and all 12 companies active.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Activity shifts</h3>
+          <p>Fusion Electronics leads the first 40 days. In the last 20, Ion Systems and Cedar Retail become the two largest companies by transaction volume.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Clusters</h3>
+          <p>The daily network is never one connected component. Early low-activity days such as 1, 7, 13, and 19 split into three separate pairs.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>Recurring ties</h3>
+          <p>Several pairs reappear on a six-day cycle. Delta Components–Fusion Electronics is the largest recurring relationship, totaling about $440,000 across 20 active days.</p>
+        </article>
+        <article>
+          <span>05</span>
+          <h3>Regional mixing</h3>
+          <p>Cross-region links increase from 56% in the first 20 days to 73% in the last 20. The later network is both denser and less regionally separated.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="notes" aria-labelledby="notes-title">
+      <div>
+        <p class="eyebrow">Design note</p>
+        <h2 id="notes-title">Reading the animation</h2>
+      </div>
+      <p>The layout keeps the same company objects and only restarts the force simulation gently when the links change. Region-based forces also pull companies toward stable areas of the chart. This does not freeze the graph, but it avoids a complete rearrangement from one day to the next. Fading links show arrivals and departures; the slider is better for comparing specific dates than relying on animation alone.</p>
+    </section>
+
+    <section class="files" aria-labelledby="files-title">
+      <h2 id="files-title">Data &amp; source</h2>
+      <ul>
+        <li><a href="../data/lab7_assignment_companies.csv">Company data</a></li>
+        <li><a href="../data/lab7_assignment_transactions_60days.csv">Transaction data</a></li>
+        <li><a href="lab7.js">D3 source code</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="status" hidden></div>
+  <footer>STATS 401 · Data Acquisition and Visualization</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="lab7.js?v=20260917"></script>
+</body>
+</html>
