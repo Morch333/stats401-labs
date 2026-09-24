@@ -1,0 +1,133 @@
+{
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "umap": {
+    "n_neighbors": 20,
+    "min_dist": 0.15,
+    "metric": "cosine",
+    "random_state": 42
+  },
+  "clustering": {
+    "method": "KMeans",
+    "clusters": 8,
+    "random_state": 42,
+    "n_init": 20
+  },
+  "cluster_terms": {
+    "0": [
+      "political",
+      "course",
+      "american",
+      "world",
+      "religious",
+      "cultural",
+      "global",
+      "historical",
+      "history",
+      "social"
+    ],
+    "1": [
+      "media",
+      "digital",
+      "course",
+      "art",
+      "students",
+      "cultural",
+      "documentary",
+      "arts",
+      "film",
+      "sound"
+    ],
+    "2": [
+      "duke",
+      "university",
+      "kunshan",
+      "duke kunshan",
+      "kunshan university",
+      "students",
+      "credit",
+      "credits",
+      "courses",
+      "dku"
+    ],
+    "3": [
+      "students",
+      "course",
+      "language",
+      "academic",
+      "skills",
+      "community",
+      "student",
+      "learning",
+      "learn",
+      "courses"
+    ],
+    "4": [
+      "chinese",
+      "china",
+      "course",
+      "students",
+      "cultural",
+      "texts",
+      "world",
+      "culture",
+      "skills",
+      "social"
+    ],
+    "5": [
+      "course",
+      "health",
+      "policy",
+      "social",
+      "human",
+      "environmental",
+      "economic",
+      "political",
+      "research",
+      "global"
+    ],
+    "6": [
+      "science",
+      "data",
+      "course",
+      "systems",
+      "materials",
+      "topics",
+      "molecular",
+      "students",
+      "include",
+      "chemistry"
+    ],
+    "7": [
+      "term",
+      "grade",
+      "student",
+      "academic",
+      "credits",
+      "students",
+      "course",
+      "credit",
+      "courses",
+      "nc"
+    ]
+  },
+  "cluster_sizes": {
+    "0": 138,
+    "1": 74,
+    "2": 126,
+    "3": 127,
+    "4": 83,
+    "5": 127,
+    "6": 138,
+    "7": 144
+  },
+  "topic_names": {
+    "0": "Society, Politics & History",
+    "1": "Media, Arts & Storytelling",
+    "2": "University Programs & Degrees",
+    "3": "Learning, Language & Student Life",
+    "4": "China & Chinese Culture",
+    "5": "Health, Environment & Public Policy",
+    "6": "Science, Technology & Data",
+    "7": "Academic Rules, Credits & Registration"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Bulletin of Duke Kunshan University Undergraduate Instruction",
+  "academic_year": "2021-2022",
+  "source": "Official DKU admissions website",
+  "source_url": "https://dku-web-admissions.s3.cn-north-1.amazonaws.com.cn/dkumain/files/V2021-22_DKU_UG_Bulletin.pdf",
+  "date_accessed": "2026-09-24",
+  "pages": 400,
+  "raw_passages": 984,
+  "clean_passages": 957,
+  "average_words": 86.3,
+  "formal_parts": 12,
+  "formal_sections": 81,
+  "model": "sentence-transformers/all-MiniLM-L6-v2"
+}

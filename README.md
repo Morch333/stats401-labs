@@ -10,5 +10,7 @@ a 50-station transit network with a force-directed diagram and an adjacency
 matrix. Lab 6 converts flat GDP data into hierarchical JSON and compares
 squarified and slice–dice treemap layouts. Lab 7 animates 60 days of commercial
 transactions in an interactive D3 network.
+Lab 8 extracts and embeds 957 bulletin passages, then coordinates a semantic
+map with a topic-by-bulletin-part matrix.
 
 Published site: https://morch333.github.io/stats401-labs/

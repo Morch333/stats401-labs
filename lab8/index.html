@@ -1,3 +1,165 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lab 8 | STATS 401</title><link rel="stylesheet" href="../css/style.css?v=20260827-lab2"></head>
-<body><main><p class="eyebrow">STATS 401</p><h1>Lab 8</h1><p class="placeholder">Lab 8 will be added here.</p><a class="button" href="../">Back to home</a></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="STATS 401 Lab 8: an interactive semantic exploration of the 2021-22 DKU Undergraduate Bulletin.">
+  <title>Lab 8 | Reading the DKU Bulletin</title>
+  <link rel="stylesheet" href="styles.css?v=20260924">
+</head>
+<body>
+  <a class="skip-link" href="#semantic-map">Skip to semantic map</a>
+
+  <header class="page-header">
+    <nav aria-label="Course navigation">
+      <a href="../">← All labs</a>
+      <span>STATS 401 · Lab 8</span>
+    </nav>
+    <div class="header-grid">
+      <div>
+        <p class="eyebrow">A 400-page document, reorganized</p>
+        <h1>Reading the bulletin by meaning</h1>
+      </div>
+      <p class="intro">The table of contents tells us where a passage belongs. Its embedding tells us what other passages it resembles. This page puts those two structures side by side.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="corpus" aria-labelledby="corpus-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">The corpus</p>
+          <h2 id="corpus-title">DKU Undergraduate Instruction Bulletin</h2>
+        </div>
+        <a class="source-link" href="https://dku-web-admissions.s3.cn-north-1.amazonaws.com.cn/dkumain/files/V2021-22_DKU_UG_Bulletin.pdf">Official PDF ↗</a>
+      </div>
+      <p class="source-note">Academic year 2021–2022 · official DKU admissions website · accessed September 24, 2026</p>
+
+      <dl class="facts">
+        <div><dt>Pages</dt><dd>400</dd></div>
+        <div><dt>Raw passages</dt><dd>984</dd></div>
+        <div><dt>After cleaning</dt><dd>957</dd></div>
+        <div><dt>Average length</dt><dd>86.3 <small>words</small></dd></div>
+        <div><dt>Formal parts</dt><dd>12</dd></div>
+        <div><dt>Sections</dt><dd>81</dd></div>
+      </dl>
+
+      <div class="overview-grid">
+        <article class="overview-card">
+          <div class="card-heading">
+            <h3>Passages by bulletin part</h3>
+            <span>square-root scale</span>
+          </div>
+          <svg id="section-chart" viewBox="0 0 610 420" role="img" aria-label="Passage counts by bulletin part"></svg>
+        </article>
+        <article class="overview-card">
+          <div class="card-heading">
+            <h3>Top corpus terms</h3>
+            <span>mean TF-IDF</span>
+          </div>
+          <svg id="term-chart" viewBox="0 0 610 420" role="img" aria-label="Top meaningful terms by average TF-IDF"></svg>
+        </article>
+      </div>
+    </section>
+
+    <section class="explorer" id="semantic-map" aria-labelledby="map-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Semantic map</p>
+          <h2 id="map-title">957 passages, arranged by similarity</h2>
+          <p class="section-copy">Nearby points use similar language. UMAP axes do not have independent meanings.</p>
+        </div>
+        <p id="result-count" class="result-count" aria-live="polite">957 passages shown</p>
+      </div>
+
+      <div class="controls" aria-label="Semantic map controls">
+        <label class="search-control">
+          <span>Search text</span>
+          <input id="search-input" type="search" placeholder="Try credit, graduation, registration…">
+        </label>
+        <label>
+          <span>Formal section</span>
+          <select id="section-filter"><option value="all">All sections</option></select>
+        </label>
+        <label>
+          <span>Semantic topic</span>
+          <select id="topic-filter"><option value="all">All topics</option></select>
+        </label>
+        <button id="reset-map" type="button">Reset filters &amp; zoom</button>
+      </div>
+
+      <div id="topic-legend" class="topic-legend" aria-label="Semantic topic legend"></div>
+
+      <div class="map-layout">
+        <div class="map-panel">
+          <svg id="embedding-chart" viewBox="0 0 920 650" role="img" aria-labelledby="embedding-title embedding-description">
+            <title id="embedding-title">Semantic embedding map of bulletin passages</title>
+            <desc id="embedding-description">Each point is one passage. Position represents semantic similarity, color represents topic, and size represents word count.</desc>
+          </svg>
+          <div class="map-help"><span>Scroll to zoom</span><span>Drag to pan</span><span>Point size = passage length</span></div>
+        </div>
+
+        <aside id="detail-panel" class="detail-panel" aria-live="polite">
+          <p class="detail-kicker">Passage details</p>
+          <h3>Select a point</h3>
+          <p>Click any passage to read it, locate it in the bulletin, and see its five nearest semantic neighbors.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="matrix-section" aria-labelledby="matrix-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Formal structure × semantic structure</p>
+          <h2 id="matrix-title">Where the topics appear</h2>
+          <p class="section-copy">Darker cells mean a larger share of that bulletin part belongs to the topic. Click a cell to highlight the same passages above.</p>
+        </div>
+        <button id="clear-cell" class="quiet-button" type="button" hidden>Clear cell selection</button>
+      </div>
+      <div class="matrix-wrap">
+        <svg id="matrix-chart" viewBox="0 0 1180 610" role="img" aria-label="Topic by bulletin part matrix"></svg>
+      </div>
+    </section>
+
+    <section class="findings" aria-labelledby="findings-title">
+      <p class="eyebrow">What the map shows</p>
+      <h2 id="findings-title">Structure and meaning overlap, but not perfectly</h2>
+      <div class="finding-grid">
+        <article><span>01</span><h3>Eight main topics</h3><p>The largest topic is Academic Rules, Credits &amp; Registration with 144 passages. Media, Arts &amp; Storytelling is the smallest at 74, but it still forms a clear region.</p></article>
+        <article><span>02</span><h3>A topic that travels</h3><p>University Programs &amp; Degrees appears in 11 of the 12 formal parts. It connects admissions, curriculum, study away, student services, and general information.</p></article>
+        <article><span>03</span><h3>The most diverse part</h3><p>Part 10, Majors and Courses, contains all eight topics and has the highest topic entropy. Its 627 passages range from laboratory science to politics and media.</p></article>
+        <article><span>04</span><h3>Similarity crosses chapters</h3><p>Passages p0115 and p0291 discuss approval of transfer credit in Parts 6 and 8. Their cosine similarity is 0.880 even though the table of contents separates them.</p></article>
+        <article><span>05</span><h3>“Credit” has several meanings</h3><p>The search finds 116 passages across seven parts and six topics. Most concern academic rules or degree programs, but the term also reaches language, science, and policy passages.</p></article>
+      </div>
+    </section>
+
+    <section class="method" aria-labelledby="method-title">
+      <div>
+        <p class="eyebrow">Design and method</p>
+        <h2 id="method-title">How I built the two views</h2>
+      </div>
+      <div class="method-copy">
+        <p>I treated each paragraph or short policy block as one passage. Font size and spacing in the PDF supplied the Part, section, and subsection hierarchy; page numbers were retained, whitespace was normalized, repeated text was removed, and very short fragments were excluded. This produced 957 passages from 984 raw blocks. I encoded the cleaned text with <code>all-MiniLM-L6-v2</code>, using normalized 384-dimensional embeddings. UMAP projected those vectors to two dimensions with 20 neighbors, minimum distance 0.15, cosine distance, and random seed 42. I then ran K-means on the original embeddings, not the UMAP coordinates, using eight clusters and 20 initializations. Topic names came from each cluster’s characteristic TF-IDF terms and representative passages.</p>
+        <p>On the map, position represents semantic similarity, color represents the labeled topic, and point size represents passage length. Search and the two filters fade irrelevant passages without rearranging the map. Clicking a passage shows its original location and nearest neighbors; clicking a neighbor moves the selection while keeping the surrounding context visible. The matrix uses formal bulletin Parts as rows, topics as columns, and within-Part proportions as color intensity, which keeps the large course-description chapter from overwhelming smaller sections. Clicking a matrix cell highlights the corresponding points, while selecting a point outlines its matrix cell. This coordination makes it possible to move between “where is this written?” and “what does this resemble?” without losing the current selection.</p>
+      </div>
+    </section>
+
+    <section class="files" aria-labelledby="files-title">
+      <h2 id="files-title">Data &amp; source</h2>
+      <ul>
+        <li><a href="../data/lab8_bulletin_passages.csv">Clean passage corpus</a></li>
+        <li><a href="../data/lab8_embedding_map.csv">Embedding map data</a></li>
+        <li><a href="../data/lab8_topic_section_matrix.csv">Topic × Part matrix</a></li>
+        <li><a href="process_bulletin.py">Python analysis script</a></li>
+        <li><a href="lab8.js">D3 source code</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="status" hidden></div>
+  <footer>STATS 401 · Data Acquisition and Visualization</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="lab8.js?v=20260924"></script>
+</body>
+</html>

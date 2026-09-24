@@ -1,0 +1,38 @@
+chapter,cluster,cluster_name,passage_count,section_total,proportion
+Part 10: Majors and Courses,0,"Society, Politics & History",138,627,0.2201
+Part 10: Majors and Courses,1,"Media, Arts & Storytelling",74,627,0.118
+Part 10: Majors and Courses,2,University Programs & Degrees,8,627,0.0128
+Part 10: Majors and Courses,3,"Learning, Language & Student Life",62,627,0.0989
+Part 10: Majors and Courses,4,China & Chinese Culture,79,627,0.126
+Part 10: Majors and Courses,5,"Health, Environment & Public Policy",126,627,0.201
+Part 10: Majors and Courses,6,"Science, Technology & Data",138,627,0.2201
+Part 10: Majors and Courses,7,"Academic Rules, Credits & Registration",2,627,0.0032
+Part 11: Academic Calendar 2021-22,7,"Academic Rules, Credits & Registration",6,6,1.0
+Part 12: Useful Contacts,2,University Programs & Degrees,1,1,1.0
+Part 1: General Information,2,University Programs & Degrees,14,19,0.7368
+Part 1: General Information,3,"Learning, Language & Student Life",3,19,0.1579
+Part 1: General Information,4,China & Chinese Culture,1,19,0.0526
+Part 1: General Information,5,"Health, Environment & Public Policy",1,19,0.0526
+Part 2: A Liberal Arts Education at Duke Kunshan University,2,University Programs & Degrees,4,5,0.8
+Part 2: A Liberal Arts Education at Duke Kunshan University,3,"Learning, Language & Student Life",1,5,0.2
+Part 3: The Curriculum,2,University Programs & Degrees,15,38,0.3947
+Part 3: The Curriculum,3,"Learning, Language & Student Life",16,38,0.4211
+Part 3: The Curriculum,7,"Academic Rules, Credits & Registration",7,38,0.1842
+"Part 4: Admission, Scholarships and Financial Aid",2,University Programs & Degrees,6,13,0.4615
+"Part 4: Admission, Scholarships and Financial Aid",3,"Learning, Language & Student Life",3,13,0.2308
+"Part 4: Admission, Scholarships and Financial Aid",7,"Academic Rules, Credits & Registration",4,13,0.3077
+Part 5: Financial Information,2,University Programs & Degrees,4,17,0.2353
+Part 5: Financial Information,4,China & Chinese Culture,2,17,0.1176
+Part 5: Financial Information,7,"Academic Rules, Credits & Registration",11,17,0.6471
+Part 6: Academic Procedures and Information,2,University Programs & Degrees,44,161,0.2733
+Part 6: Academic Procedures and Information,3,"Learning, Language & Student Life",9,161,0.0559
+Part 6: Academic Procedures and Information,7,"Academic Rules, Credits & Registration",108,161,0.6708
+Part 7: Academic Advising and Support,2,University Programs & Degrees,1,13,0.0769
+Part 7: Academic Advising and Support,3,"Learning, Language & Student Life",12,13,0.9231
+"Part 8: Career Services, Study Away, and Research Opportunities",2,University Programs & Degrees,19,27,0.7037
+"Part 8: Career Services, Study Away, and Research Opportunities",3,"Learning, Language & Student Life",3,27,0.1111
+"Part 8: Career Services, Study Away, and Research Opportunities",7,"Academic Rules, Credits & Registration",5,27,0.1852
+Part 9: Student Affairs and Campus Life,2,University Programs & Degrees,10,30,0.3333
+Part 9: Student Affairs and Campus Life,3,"Learning, Language & Student Life",18,30,0.6
+Part 9: Student Affairs and Campus Life,4,China & Chinese Culture,1,30,0.0333
+Part 9: Student Affairs and Campus Life,7,"Academic Rules, Credits & Registration",1,30,0.0333
