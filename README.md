@@ -14,5 +14,7 @@ Lab 8 extracts and embeds 957 bulletin passages, then coordinates a semantic
 map with a topic-by-bulletin-part matrix.
 Lab 9 joins 2025 nominal GDP to Natural Earth boundaries and compares a
 choropleth with a linked Dorling cartogram.
+Lab 10 adds voice selection and regional filtering to those coordinated maps,
+with visible recognition feedback and conventional fallback controls.
 
 Published site: https://morch333.github.io/stats401-labs/

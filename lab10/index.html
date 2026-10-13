@@ -1,3 +1,156 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lab 10 | STATS 401</title><link rel="stylesheet" href="../css/style.css?v=20260827-lab2"></head>
-<body><main><p class="eyebrow">STATS 401</p><h1>Lab 10</h1><p class="placeholder">Lab 10 will be added here.</p><a class="button" href="../">Back to home</a></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="STATS 401 Lab 10: voice-controlled exploration of a coordinated GDP choropleth and cartogram.">
+  <title>Lab 10 | Voice-Controlled GDP Maps</title>
+  <link rel="stylesheet" href="styles.css?v=20261013">
+</head>
+<body>
+  <a class="skip-link" href="#interaction">Skip to interaction</a>
+
+  <header class="page-header">
+    <nav aria-label="Course navigation">
+      <a href="../">← All labs</a>
+      <span>STATS 401 · Lab 10</span>
+    </nav>
+    <div class="header-content">
+      <p class="eyebrow">Novel interaction · Web Speech API</p>
+      <h1>Say it.<br>See it.</h1>
+      <p>A voice layer for the coordinated GDP maps from Lab 9. Ask for a country or region, then watch both views respond.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="interaction-lab" id="interaction" aria-labelledby="interaction-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Voice console</p>
+          <h2 id="interaction-title">Explore without touching the map</h2>
+        </div>
+        <p class="privacy-note">The page requests microphone access only after you press the button. It does not save audio or transcripts.</p>
+      </div>
+
+      <div class="voice-console">
+        <div class="voice-primary">
+          <button id="listen-button" class="listen-button" type="button">
+            <span class="mic-icon" aria-hidden="true"></span>
+            <span id="listen-label">Start listening</span>
+          </button>
+          <div>
+            <p id="voice-status" class="voice-status" role="status" aria-live="polite">Microphone is off</p>
+            <p class="support-note">Best supported in Chrome. Listening stops after one command.</p>
+          </div>
+        </div>
+
+        <div class="voice-feedback" aria-live="polite">
+          <div><span>Heard</span><strong id="heard-text">—</strong></div>
+          <div><span>Action</span><strong id="action-text">Waiting for a command</strong></div>
+        </div>
+
+        <div class="command-examples" aria-label="Example voice commands">
+          <p>Try saying</p>
+          <button class="command-chip" type="button" data-demo-command="highlight China">“Highlight China”</button>
+          <button class="command-chip" type="button" data-demo-command="show Europe">“Show Europe”</button>
+          <button class="command-chip" type="button" data-demo-command="reset">“Reset”</button>
+        </div>
+      </div>
+
+      <div class="fallback-panel" aria-labelledby="fallback-title">
+        <div>
+          <p class="eyebrow">Mouse &amp; keyboard fallback</p>
+          <h3 id="fallback-title">The same actions still work without speech</h3>
+        </div>
+        <label>Country
+          <select id="country-select"><option value="">Choose a country</option></select>
+        </label>
+        <label>Region
+          <select id="region-select">
+            <option value="">All regions</option>
+            <option>Africa</option>
+            <option>Asia</option>
+            <option>Europe</option>
+            <option>North America</option>
+            <option>South America</option>
+            <option>Oceania</option>
+          </select>
+        </label>
+        <button id="reset-all" type="button">Reset maps</button>
+      </div>
+    </section>
+
+    <section class="maps-section" id="maps" aria-labelledby="maps-title">
+      <div class="section-heading map-heading">
+        <div>
+          <p class="eyebrow">Lab 9, extended</p>
+          <h2 id="maps-title">One command, two coordinated views</h2>
+          <p class="interaction-note">Voice, dropdown, click, hover, and keyboard focus all call the same map functions.</p>
+        </div>
+        <p id="selection-note" class="selection-note" aria-live="polite">Showing all 50 economies</p>
+      </div>
+
+      <div class="map-grid">
+        <article class="map-card">
+          <div class="map-card-heading">
+            <div><span>01</span><h3>GDP choropleth</h3></div>
+            <button id="reset-zoom" type="button">Reset zoom</button>
+          </div>
+          <p>Country shape stays geographic; darker color means higher 2025 nominal GDP.</p>
+          <div class="map-frame">
+            <svg id="choropleth" viewBox="0 0 980 560" role="img" aria-labelledby="choropleth-title choropleth-desc">
+              <title id="choropleth-title">2025 GDP choropleth map</title>
+              <desc id="choropleth-desc">A world map where darker blue represents higher nominal GDP. Voice or conventional controls can select a country or filter a region.</desc>
+            </svg>
+          </div>
+          <div id="color-legend" class="legend" aria-label="GDP color legend"></div>
+        </article>
+
+        <article class="map-card">
+          <div class="map-card-heading">
+            <div><span>02</span><h3>Dorling cartogram</h3></div>
+            <span class="area-key"><i></i> Circle area = GDP</span>
+          </div>
+          <p>Each top-50 economy is a circle near its geographic position; area represents GDP.</p>
+          <div class="map-frame">
+            <svg id="cartogram" viewBox="0 0 980 560" role="img" aria-labelledby="cartogram-title cartogram-desc">
+              <title id="cartogram-title">2025 GDP Dorling cartogram</title>
+              <desc id="cartogram-desc">Fifty circles sized by nominal GDP, coordinated with the choropleth and voice controls.</desc>
+            </svg>
+          </div>
+          <div class="size-legend" aria-label="Cartogram size examples">
+            <span><i class="bubble small"></i>$0.3T</span>
+            <span><i class="bubble medium"></i>$5T</span>
+            <span><i class="bubble large"></i>$30T</span>
+          </div>
+        </article>
+      </div>
+      <p id="chart-error" class="error" role="alert" hidden></p>
+    </section>
+
+    <section class="reflection" aria-labelledby="reflection-title">
+      <div>
+        <p class="eyebrow">Design reflection</p>
+        <h2 id="reflection-title">Why voice works here—and where it does not</h2>
+      </div>
+      <p>I extended the coordinated GDP choropleth and cartogram from Lab 9 with voice commands. A user can say “highlight China,” “show Europe,” or “reset” to select a country, filter both views by continent, or restore the full display. This supports quick geographic lookup while the user keeps attention on the maps instead of searching through menus. Voice is especially useful when a small country is difficult to click or when the cartogram has moved circles away from familiar borders. The page repeats the recognized phrase and reports the resulting action, so a mistaken command is visible rather than silent. In testing, country names with multiple common forms—such as United States/U.S. and South Korea/Korea—needed aliases. Background noise, accents, browser support, and microphone permission can still cause errors. For that reason, speech begins only after the user presses Start listening, and the same selection, filtering, and reset actions remain available through dropdowns, mouse clicks, keyboard focus, and buttons.</p>
+    </section>
+
+    <section class="files" aria-labelledby="files-title">
+      <h2 id="files-title">Data &amp; source</h2>
+      <ul>
+        <li><a href="../data/lab9_gdp_2025_top50.csv">2025 GDP data</a></li>
+        <li><a href="../data/lab9_world_countries.geojson">Natural Earth GeoJSON</a></li>
+        <li><a href="lab10.js">D3 and voice source</a></li>
+        <li><a href="../lab9/">Original Lab 9</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="status" hidden></div>
+  <footer>STATS 401 · Data Acquisition and Visualization</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="lab10.js?v=20261013"></script>
+</body>
+</html>
